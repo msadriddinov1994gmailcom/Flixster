@@ -29,35 +29,31 @@ Flixster is a movie browsing app to see a list of trending, currently playing an
 
 ### 1. User Stories (Required and Optional)
 
-**Required Must-have Stories**
+**Required Must-have Stories** 
 
-- [x] Customers can log in their account
-   - [x] create an icon for the app
-   - [x] create a splash screen and wait for 20 sec each time the app starts
-   - [x] create a server and user table to create an account or get access to an existing account
-   - [x] create UI for login activity.
-   - [x] connect the app to the server and user table
-   - [x] make MainActivity persistent after user logs in.
-- [x] Customers can see a list of available cloth for sale
-   - [x]  create bottom menu with three fragments such as Catalog, Basket and Profile.
-   - [x]  create an item layout for each item.
-   - [x]  send a request to the server for posted items.
-- [x] Customer can go to checkout and place an online order.
-- [ ] Customer can see thier profile which includes information such as address, life-time orders and so on.
+- [x] User can view a list of movies (title, poster image, and overview) currently playing in theaters from the Movie Database API.
+   - [x] Making an API request.
+   - [x] Parsing JSON.
+   - [x] Implementating RecyclerView.
+   - [x] Using the AsyncHttpClient and the Glide libraries to handle newtwork requests and displaying movie poster images.
 
 **Optional Nice-to-have Stories**
 
-* Customers can add items to a bustket
-* Customers can create an address book where they can store thier multiple addresses.
-* Customers can cancel orders
-* Customers can pay online for orders
+* Views should be responsive for both landscape/portrait mode.
+   * In portrait mode, the poster image, title, and movie overview is shown.
+   * In landscape mode, the rotated alternate layout should use the backdrop image instead and show the title and movie overview to the right of it.
+* Display a nice default placeholder graphic for each image during loading.
+* Improve the user interface through styling and coloring.
+* For popular movies (i.e. a movie voted for more than 5 stars), the full backdrop image is displayed. 
+* Otherwise, a poster image, the movie title, and overview is listed. 
+* Use Heterogenous RecyclerViews and use different ViewHolder layout files for popular movies and less popular ones.
 
 ### 2. Screen Archetypes
 
-* SplashActivity screen - User signs up or logs into their account. Upon Download/Reopening of the application, the user is prompted to log in to gain access to their profile information to be properly matched with another person.
-* Now_playing screen - User can see a list of items for sale and select the quantity of the item and add it to a basket.
-* Trendind screen - User can see a list of items in the basket and choose address and payment methods.
-* Upcoming screen  - User can see thier profile which cosists of thier basic personal information along side with thier life-time orders and address books.
+* SplashActivity screen - A very brief into is displayed.
+* Now_playing screen - User can see a list of movies which are currently being played at theatre.
+* Trending screen - User can see a list of movies which are trending at theatre.
+* Upcoming screen  - User can see a list of movies which are upcoming at theatre.
 
 ### 3. Navigation
 
@@ -69,10 +65,10 @@ Flixster is a movie browsing app to see a list of trending, currently playing an
 
 **Flow Navigation** (Screen to Screen)
 
-* Forced SplashActivity -> Account creation if no log in is available.
-* Cloth Selection (Or Queue if Optional) -> send a request to server to send back a list of items for sale along side with each item's information.
-* Checkout -> show a list of items in thebasket, give user selection of addresses from thier address book, and ask user to fill payment information.
-* Profile -> request to a server to send back currentuser info along with thier life-time orders
+* Forced SplashActivity -> displays a very brief intoduction with app logo.
+* Now_playing screen - sends a request to server to send back a list of movies which are currently being played at theatre.
+* Trending screen - sends a request to server to send back a list of movies which are trending at theatre.
+* Upcoming screen  - sends a request to server to send back a list of movies which are upcoming at theatre.
 
 ## Wireframes
 <img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Diagram.png" width=600>
