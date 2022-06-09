@@ -1,5 +1,9 @@
 # Flixster
-<img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Cover.jpg" width=300>
+
+
+<img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Cover.jpg" width=3000>
+
+
 ## Table of Contents
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
