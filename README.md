@@ -36,7 +36,14 @@ Flixster is a movie browsing app to see a list of trending, currently playing an
    - [x] Parsing JSON.
    - [x] Implementating RecyclerView.
    - [x] Using the AsyncHttpClient and the Glide libraries to handle newtwork requests and displaying movie poster images.
-
+- [x] Expose details of movie (ratings using RatingBar, popularity, and synopsis) in a separate activity.
+   - [x]  Assignment Intro - Activities & Intents.
+   - [x]  Details Screen Implementation.
+- [x] Allow video posts to be played in full-screen using the YouTubePlayerView.
+   - [x] YoutubePlayerView.
+   - [x] See the videos API for video information.
+   - [x] If your Android device or emulator is running on API 30+, you will likely see an error with the Youtube initialization.
+   
 **Optional Nice-to-have Stories**
 
 * Views should be responsive for both landscape/portrait mode.
