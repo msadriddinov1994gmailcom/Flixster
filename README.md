@@ -11,11 +11,13 @@
 2. [Schema](#Schema)
 
 ## Overview
+
 ### Description
+
 Flixster is a movie browsing app to see a list of trending, currently playing and upcoming movies.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
+
 - **Category:** Browsing/Entertainment
 - **Mobile:** This app would be primarily developed for mobile but would perhaps be just as viable on a computer, such as AMC or other similar apps. Functionality wouldn’t be limited to mobile devices, however mobile version could potentially have more features.
 - **Story:**  displays a list of trending, currently playing and upcoming movies. User can change different screens to see trending, upcoming and currently playing movies at theatre.
@@ -36,13 +38,11 @@ Flixster is a movie browsing app to see a list of trending, currently playing an
    - [x] create UI for login activity.
    - [x] connect the app to the server and user table
    - [x] make MainActivity persistent after user logs in.
-   - [x] <img src="https://github.com/Pod41/ZaynaShoppingAppPart1/blob/master/Files/Zayna-Login-Activity.gif" width=300>
 - [x] Customers can see a list of available cloth for sale
    - [x]  create bottom menu with three fragments such as Catalog, Basket and Profile.
    - [x]  create an item layout for each item.
    - [x]  send a request to the server for posted items.
 - [x] Customer can go to checkout and place an online order.
-   - [x]  <img src="https://github.com/Pod41/ZaynaShoppingApp-Sprint2-3/blob/Spint1-LoginActivity/Zayna-Spring-2-and-3.gif" width=300>
 - [ ] Customer can see thier profile which includes information such as address, life-time orders and so on.
 
 **Optional Nice-to-have Stories**
@@ -78,48 +78,50 @@ Flixster is a movie browsing app to see a list of trending, currently playing an
 <img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Diagram.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
-<img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Screen%201%20-%20Splash.jpg" width=300><img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Screen%202%20-%20Main%20Activity.jpg" width=300><img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Screen%203%20-%20Details.jpg" width=300>
+<img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Screen%201%20-%20Splash.jpg" width=300>   <img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Screen%202%20-%20Main%20Activity.jpg" width=300>   <img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Screen%203%20-%20Details.jpg" width=300>
 
 
 ### [BONUS] Interactive Prototype
-<img src="https://github.com/Pod41/ZaynaShoppingAppPart1/blob/master/Files/Zayna.gif" width=300>
+<img src="https://github.com/msadriddinov1994gmailcom/Flixster/blob/master/Images/Flixster%20Prototype.gif" width=300>
 
 ## Schema 
-[This section will be completed in Unit 9]
+
 ### Models
-#### Post
+#### GET
+
 
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
-   | objectId      | String   | unique id for the user post (default field) |
-   | itemName      | String   | name of the dress |
-   | description   | String   | describes item |
-   | numberOfSold  | Number   | # of item sold |
-   | rating        | Number   | rating of item rated by customers |
-   | createdAt     | DateTime | date when post is created (default field) |
-   | updatedAt     | DateTime | date when post is last updated (default field) |
+   | movieId       | Integer  | unique id for each movie (default field) |
+   | voteAverage   | Double   | rating of item rated by watchers |
+   | posterPath    | String   | path for movie poster images |
+   | title         | String   | movie's title |
+   | overview      | String   | overview of movie |
+
 ### Networking
 #### List of network requests by screen
-   - Home Feed Screen
-      - (Read/GET) Query all posts where user is author
-         ```swift
-         let query = PFQuery(className:"Post")
-         query.whereKey("author", equalTo: currentUser)
-         query.order(byDescending: "createdAt")
-         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let error = error { 
-               print(error.localizedDescription)
-            } else if let posts = posts {
-               print("Successfully retrieved \(posts.count) posts.")
-           // TODO: Do something with posts...
+   - Now_playing Screen
+      - (Read/GET) Query all movies which are currently played at theatre.
+         ```kotlin
+         val client = AsyncHttpClient()
+         client.get(NOW_PLAYING, object : JsonHttpResponseHandler(){
+            override fun onFailure(statusCode: Int, headers: Headers?, response: String?, throwable: Throwable?
+            ) {
+                Log.e(TAG, "onFailure.")
             }
-         }
+
+            override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON) {
+                try {
+                    Log.i(TAG, "onSuccess. $statusCode")
+                    val movieJsonArray = json.jsonObject.getJSONArray("results")
+                    movies.addAll(Movie.fromJsonArray(movieJsonArray))
+                    movieAdapter.notifyDataSetChanged()
+                }
+                catch (e: JSONException) { Log.e(TAG, "Encountered exception $e.") }
+            }
+
+        })
          ```
-      - (Create/POST) Create a new order on a post
-      - (Delete) Delete existing order
-   - Create Post Screen
-      - (Create/POST) Create a new post object
-   - Profile Screen
-      - (Read/GET) Query logged in user object
-      - (Update/PUT) Update user profile image
+      - (Read/GET) Query all movies which are trending at theatre.
+      - (Read/GET) Query all movies which are upcoming at theatre.
 
